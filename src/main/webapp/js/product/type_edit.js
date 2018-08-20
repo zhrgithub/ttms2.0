@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 /**根据id查找ProductType对象*/
 function doGetObjectById(){
-	var url = 'product/type/doFindObjectById.do';
+	var url = 'productType/doFindObjectById.do';
 	var params = {'id':typeId};
 	$.post(url,params,function(result){
 		if(result.state ==SUCCESS){
@@ -50,11 +50,11 @@ function doSaveOrUpdate(){
 		var params = doGetFormValues();
 		var typeId = $('#container').data('typeId');
 		if(typeId)params.id=typeId;
-		var url=typeId?'productType/type/doUpdateObject.do':'productType/doSaveObject.do';
+		var url=typeId?'productType/doUpdateObject.do':'productType/doSaveObject.do';
 		$.post(url,params,function(result){
 			if(result.state == SUCCESS){
 				alert('操作成功！');
-				$('#container').load('product/type/listUI.do');
+				$('#container').load('productType/listUI.do');
 			}else{
 				alert(result.message);
 			}

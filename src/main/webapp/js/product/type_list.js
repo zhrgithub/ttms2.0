@@ -39,9 +39,9 @@ width : '100px'
 
 $(document).ready(function(){
 	doGetObjects();
-	$("#formHead").on("click",".btn-add",loadEditPage).on("click","load-product-type",loadTypeTree);
-	//$('#formHead').on('click','.btn-add,.btn-update',doLoadEditUI);
-//	$('#formHead').on('click','.btn-delete',doDeleteById)
+	//$("#formHead").on("click",".btn-add",loadEditPage).on("click","load-product-type",loadTypeTree());
+	$('#formHead').on('click','.btn-add,.btn-update',doLoadEditUI);
+	$('#formHead').on('click','.btn-delete',doDeleteById)
 })
 //加载编辑页面
 function loadEditPage(){
@@ -49,10 +49,18 @@ function loadEditPage(){
 	//container为index.jsp中div的一个id
 	$("#container").load(url);
 }
-//function loadTypeTree(){
-//	var url="";
-//	
-//}
+
+//定义树的基本配置
+var setting={
+			data : {
+			    simpleData : {
+					enable : true,
+					idKey : "id",  //节点数据中保存唯一标识的属性名称
+					pIdKey : "parentId",  //节点数据中保存其父节点唯一标识的属性名称
+					rootPId : null  //根节点id
+				}
+		}
+	}
 function doGetObjects(){//加载数据(以树结构形式进行展示)
 	var url="productType/doFindObjects.do";
 	var tableId="typeTable";
@@ -79,7 +87,8 @@ TypeObject.initColumn = function() {
 
 //显示新增菜单页面
 function doLoadEditUI(){
-	var url = 'product/type/editUI.do';
+	var url = 'productType/editUI.do';
+	//debugger
 	if($(this).hasClass("btn-update")){
 		var selected = $('#typeTable').bootstrapTreeTable('getSelections');
 		if (selected.length == 0) {
@@ -98,9 +107,9 @@ function doDeleteById(){
     } 
 	var typeId = selected[0].id
 	var params = {'id':typeId};
-	var url = 'product/type/doDeleteObjectById.do';
+	var url = 'productType/doDeleteObjectById.do';
 	$.post(url,params,function(result){
-		if(result.state==SUCCESS){
+		if(result.state==1){
 			alert('删除成功！');
 			doGetObjects();
 		}else{
