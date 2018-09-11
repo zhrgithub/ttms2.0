@@ -35,4 +35,5 @@ public interface TeamDao  extends BaseDao<Team>{
 		
 		/**根据id修改project对象*/
 	//	int updateObject(Team team);
+		//teamdao修改成功
 }
