@@ -34,7 +34,5 @@ public interface TeamDao  extends BaseDao<Team>{
 		Team findObjectById(Integer id);
 		
 		/**根据id修改project对象*/
-	//	int updateObject(Team team);
-		//teamdao修改成功
-		sfsdfsfdsfdsafsdf
+	//	int updateObject(Team team);bhbhb
 }

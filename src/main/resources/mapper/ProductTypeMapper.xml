@@ -7,6 +7,7 @@
         (select name  from tms_classes p where c.parentId=p.id) as parentName
         from tms_classes c        
      -->
+     <!-- 查询所有 -->
 		<select id="findObjects" resultType="map">
 					 select c.*,p.name parentName
 				         from tms_classes c left join tms_classes p
@@ -43,8 +44,42 @@
 				now(),
 				now()
 				)
-				
 		</insert>
-		
-		
+		<!--根据id 修改产品信息 -->
+			<update id="updateObject" parameterType="cn.aliyun.ttms.product.entity.ProductType">
+		        update tms_classes
+				set name=#{name},
+						sort=#{sort},
+						parentId=#{parentId},
+						note=#{note},
+						modifiedUser=#{modifiedUser}, 
+						modifiedTime=NOW()
+				where id=#{id};
+			</update>
+		    <!-- 根据id查询菜单信息 -->
+					<select id="findObjectById" resultType="map">
+						select 
+							name,
+							sort,
+							parentId,
+							note,
+							(select p.name from tms_classes p where p.id = c.parentId) as parentName
+						from 
+							tms_classes c
+						where
+							id = #{id}
+					</select>
+		<!-- 查询要删除的菜单是否有子菜单 -->
+			<select id="hasChildObject" resultType="java.lang.Integer">
+				select
+					count(*)
+				from
+					tms_classes
+				where
+					parentId = #{id}
+			</select>
+			
+			<delete id="deleteObjectById" parameterType="java.lang.Integer">
+			    delete from tms_classes where id=#{id}
+			</delete>
 </mapper>

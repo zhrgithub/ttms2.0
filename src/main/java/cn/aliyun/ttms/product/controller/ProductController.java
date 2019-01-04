@@ -45,7 +45,25 @@ public class ProductController {
 			return new JsonResult();
 		}
 		
+		@RequestMapping("doUpdateObject")
+		@ResponseBody
+		public JsonResult doUpdateObject(ProductType type) {
+			productTypeService.updateObject(type);
+			return new JsonResult();
+		}		
 		
+		@RequestMapping("doFindObjectById")
+		@ResponseBody
+		public JsonResult doFindObjectById(Integer id) {
+			Map<String,Object> map=productTypeService.findObjectById(id);
+			return new JsonResult(map);
+		}
 		
+		@RequestMapping("doDeleteObjectById")
+		@ResponseBody
+		public JsonResult doDeleteObjectById(Integer id) {
+			productTypeService.deleteObjectById(id);
+			return new JsonResult();
+		}
 		
 }

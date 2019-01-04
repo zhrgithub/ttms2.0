@@ -27,7 +27,6 @@ public class ProductTypeServiceImpl  implements ProductTypeService{
 	public void saveObject(ProductType type) {
 		int rows=productTypeDao.insertObject(type);
 		if(rows==-1)throw new RuntimeException("insert error");
-		
 	}
 	public void updateObject(ProductType type) {
 		int rows=productTypeDao.updateObject(type);
@@ -37,5 +36,11 @@ public class ProductTypeServiceImpl  implements ProductTypeService{
 		if(id==null)throw new RuntimeException("id can not be null");
 		return productTypeDao.findObjectById(id);
 	}
-
+	public void deleteObjectById(Integer id) {
+		if(id==null)throw new RuntimeException("id can not be null");
+		int count=productTypeDao.hasChildObject(id);
+		if(count>0)throw new RuntimeException("请删除子类");
+		int rows=productTypeDao.deleteObjectById(id);
+		if(rows==-1)throw new RuntimeException("delete error");
+	}
 }

@@ -11,4 +11,6 @@ public interface ProductTypeService {
 		void saveObject(ProductType type);
 		void updateObject(ProductType type);
 		Map<String,Object> findObjectById(Integer id);
+		void deleteObjectById(Integer id);
+		
 }

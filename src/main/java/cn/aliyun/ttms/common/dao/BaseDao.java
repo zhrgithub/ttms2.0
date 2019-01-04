@@ -8,5 +8,4 @@ public interface BaseDao<T> {
 	
 	
 	
-	
 }
